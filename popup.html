@@ -1,0 +1,134 @@
+<html style="min-width:800px; min-height:599px;">
+
+<head>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popup.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="head">
+        <h3>
+            <img src="img/gmail.png" id="logo" />
+            <span id="caption">On This Day, That Year</span>
+        </h3>
+    </div>
+    <div class="container" id="emailContainer">
+        <div id="mailbox">
+
+            <div class="leftDiv">
+
+                <p class="text-center" id="newDay">
+                    <a href="#" class="btn btn-danger btn-sm" role="button" id="anotherDay">Try Another Day</a>
+                </p>
+                <div id="dateSelector">
+                    <span>
+                        <select id="month" class="custom-select custom-select-sm">
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                    </span>
+                    <span>
+                        <select id="day" class="custom-select custom-select-sm">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                    </span>
+                    <span id="goButton">
+                        <u>
+                            <a href="#" id="setNewDate">Go</a>
+                        </u>
+                    </span>
+                </div>
+                <div id="navBar"></div>
+                <div id="home"></div>
+                <div class="footer">
+                    <span class="footerText">
+                        <p>
+                            <a href="https://twitter.com/prashantbaid" target="_blank">By @prashantbaid</a>
+                        </p>
+                        <p>
+                            <a href="mailto:prashantvbaid@gmail.com" target="_blank">Report a Bug</a>
+                        </p>
+                        <p>
+                            <a href="http://prashantb.com" target="_blank">View in Github</a>
+                        </p>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="rightDiv" id="messageList">
+                <div id="messages"></div>
+
+            </div>
+        </div>
+        <div id="message"></div>
+    </div>
+    <!-- <footer class="footer"> -->
+    <div id="authMessage">
+        <div id="authView">
+            <div id="authLabel">Authorize Gmail to view your emails on this day, that year</div>
+            <br>
+            <a href="#" class="btn btn-danger" role="button" id="authorizeGmail">Authorize Gmail</a>
+        </div>
+        <div id="authDisclaimer">
+            <samp>P.S. This extension has read-only access to your email; it cannot create, send, modify or delete your emails.
+                This extension makes no external network calls so your emails are safe and will never leave your system.
+                Check the
+                <a href="http://prashantb.com" target="_blank">source code</a> for more details.</samp>
+        </div>
+    </div>
+    <!-- </footer> -->
+    <div id="preloader">
+        <div id="loader"></div>
+        <span id="loaderText">Retreiving Emails...</span>
+    </div>
+
+
+
+</body>
+
+</html>
