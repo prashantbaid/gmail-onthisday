@@ -72,7 +72,7 @@ function setupNavBar() {
     $('#navBar').html(html);
     for (let label in gmails) {
         let formattedLabel = formatLabel(label);
-        formattedLabel === 'Inbox' ? undefined : formattedLabel;
+        formattedLabel = formattedLabel === 'Inbox' ? undefined : formattedLabel;
         if (formattedLabel) {
             html += '<a class="navLabel" id="' + label + '" href="#">' + formatLabel(label) + ' (' + getEmailCount(label) + ')</a><hr>';
         }
@@ -387,4 +387,3 @@ $(document).ready(function () {
     });
 
 });
-
