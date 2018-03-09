@@ -6,20 +6,26 @@ let newDate;
 
 //TODO: Find a non ugly way of doing this.
 function initializeWorld() {
-    if (chrome.extension.getBackgroundPage().finishedLoading) {
-        //obtain emails from the background page
-        gmailObject = chrome.extension.getBackgroundPage().gmailsToday;
+    //obtain emails from the background page
+    gmailObject = chrome.extension.getBackgroundPage().gmailsToday;
+    let isLoading = chrome.extension.getBackgroundPage().isLoading;
+    let finishedLoading = chrome.extension.getBackgroundPage().finishedLoading;
+
+    if (finishedLoading) {
         gmails = gmailObject.emailObj;
-        //"LET THERE BE LIGHT!" 
         createWorld();
+        return 0;
     }
-    else {
-        $('#emailContainer').hide();
-        $('#preloader').show();
+    if(!isLoading && !finishedLoading) {
+        let options = {
+            thisMonthDay: ''
+        }
+        chrome.extension.getBackgroundPage().reinitializer(options);
+        return 0;
     }
+    $('#emailContainer').hide();
+    $('#preloader').show();
 }
-
-
 
 //Hello World
 function createWorld() {
@@ -51,7 +57,7 @@ function sanitizeEmailObj() {
 //Home Page Emails.
 //TODO: Decide which category to show?
 function setupInbox() {
-    $('#messages').html(listEmails('CATEGORY_PERSONAL'));
+    $('#messages').html(listEmails('INBOX'));
 }
 
 //Show Categories
@@ -127,7 +133,6 @@ function showEmail(emailObj) {
     const date = emailObj.date || '';
     const to = emailObj.to || '';
     const body = emailObj.body.trim() === '<div dir="ltr"><br></div>' ? '<samp>This message could not be read (possibly because it contains an attachment). Please click on "Open in Gmail" button at the top to open this email in Gmail.</samp>' : emailObj.body;
-    console.log('body' + body.trim() + 'body');
     html += '<div id="backDiv"><a class="btn btn-primary" role="button" id="backButton">Back</a><a class="btn btn-danger" role="button" id="gmailButton" href="https://mail.google.com/mail/u/0/#inbox/' + emailObj.id + '" target="_blank">Open In Gmail</a></div><table class="table table-bordered" id="emailView"><tbody><tr><th id="emailLabel">From</th><td>' + from + '</td></tr><tr><th id="emailLabel">To</th><td id="emailTo"><div style="overflow:auto; max-height:100px;">' + to + '</div></td></tr><tr><th id="emailLabel">Date</th><td>' + date + '</td></tr><tr><th id="emailLabel">Subject</th><td>' + subject + '</td></tr><tr><td colspan="2" id="emailBody">' + body + '</td></tbody></table>';
 
     $('#mailbox').hide();
@@ -253,8 +258,8 @@ function getEmailCount(label) {
 //Stuff happens here
 $(document).ready(function () {
 
-    //TODO: If something unexpected breaks, the page is going to load forever.
-    //Do more error handling.
+    //NOTE: If something unexpected breaks, the page is going to load forever.
+    //TODO: Do more error handling.
     $('#emailContainer').hide();
     $('#preloader').show();
 

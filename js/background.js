@@ -3,6 +3,7 @@
 var gmails = {};
 var gmailsToday = {};
 var finishedLoading = false;
+var isLoading = false;
 
 //global variables
 let labelObj = {};
@@ -53,6 +54,7 @@ function getAuthTokenInteractiveCallback(token) {
     } else {
         getLabels(token);
         getProfile(token);
+        isLoading = true;
     }
 }
 
@@ -140,7 +142,7 @@ function emailCountCallback(response, options) {
         //NOTE: this does not mean there are no active calls.
         //TODO: Revisit the logic to ensure there are no active AJAX calls.
         finishedLoading = true;
-
+        isLoading = false;
         //Ugh, this is really ugly
         if (thisMonthDay === getDate(new Date())) {
             setBadgeCount(emailCount);
@@ -268,12 +270,14 @@ function initilizeYearArr(year) {
     }
 }
 
-function reinitializeVars(options) {
+function reinitializer(options) {
     thisMonthDay = options.thisMonthDay;
     countdown = 0;
     finishedLoading = false;
     emailCount = 0;
+    getAuthTokenSilent();
 }
+
 
 
 //Will I ever be good at dates? (no pun)
@@ -288,6 +292,7 @@ function getDate(time) {
 
 
 //Show Notification Functions
+//TODO: This will ask for additional notification permission. Do I really want to annoy users?
 function createBasicNotification(options) {
     var notificationOptions = {
         'type': 'basic',
@@ -365,8 +370,8 @@ function onAlarm(alarm) {
         let options = {
             thisMonthDay: ''
         }
-        reinitializeVars(options);
-        getAuthTokenSilent();
+        gmailsToday = {};
+        reinitializer(options);
     }
 }
 
@@ -375,8 +380,7 @@ function onMessage(request, sender, sendResponse) {
         let options = {
             thisMonthDay: request.thisMonthDay
         }
-        reinitializeVars(options);
-        getAuthTokenSilent();
+        reinitializer(options);
     }
 }
 

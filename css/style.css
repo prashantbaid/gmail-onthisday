@@ -54,13 +54,14 @@
 
 #navBar {
     position: relative;
-    height: 250px;
-    overflow: auto;
+    height: 230px;
+    overflow-x: auto;
+    overflow-y: scroll;
     border-bottom: 3px solid #eee;
-    width: 200px;
+    width: 175px;
     padding-left: 15px;
-    padding-top: 15px;
-    font-size: 14px;
+    font-size: 12px;
+    margin-top: 50px;
 }
 
 
@@ -131,13 +132,13 @@
 }
 
 #home {
-    font-size: 12px;
+    font-size: 10px;
     position: relative;
-    width: 200px;
+    width: 175px;
     padding: 20px;
     max-height: 100px;
     overflow: auto;
-    padding-top: 40px;
+    padding-top: 25px;
 }
 
 #recCount,
@@ -149,10 +150,6 @@
 #byYear {
     width: 200px;
     margin: 0 auto;
-}
-
-.highcharts-credits {
-    display: none;
 }
 
 #viewEmailsButton {
@@ -175,30 +172,30 @@
     float: right;
     font-weight: 200;
     font-size: 12px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .footer {
-    position: relative;
+    position: fixed;
+    bottom:5px;
     font-size: 10px;
     padding-left: 20px;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: 200px;
+    width: 175px;
+    line-height: 0.6;
 }
 
 #newDay {
     position: relative;
-    margin-bottom: 10px;
-    width: 200px;
+    width: 175px;
     margin-top: 10px;
 }
 
 #dateSelector {
-    position: relative;
-    margin-top: 50px;
+    position: fixed;
     font-size: 10px;
-    width: 200px;
+    width: 175px;
     text-align: center;
     display: none;
 }
@@ -208,14 +205,14 @@
 }
 
 .leftDiv {
-    width: 200px;
+    width: 175px;
     float: left;
     position:fixed;
     overflow: scroll;
 }
 
 .rightDiv {
-    width: 600px;
+    width: 625px;
     float: right;
 }
 
