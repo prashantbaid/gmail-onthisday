@@ -4,6 +4,7 @@ var gmails = {};
 var gmailsToday = {};
 var finishedLoading = false;
 var isLoading = false;
+var isGmailsTodaySet = false;
 
 //global variables
 let labelObj = {};
@@ -147,6 +148,7 @@ function emailCountCallback(response, options) {
         if (thisMonthDay === getDate(new Date())) {
             setBadgeCount(emailCount);
             gmailsToday = JSON.parse(JSON.stringify(gmails));
+            isGmailsTodaySet = true;
             chrome.extension.sendMessage({ thisDay: finishedLoading });
         } else {
             chrome.extension.sendMessage({ thatDay: finishedLoading });
@@ -371,6 +373,7 @@ function onAlarm(alarm) {
             thisMonthDay: ''
         }
         gmailsToday = {};
+        isGmailsTodaySet = false;
         reinitializer(options);
     }
 }
@@ -398,8 +401,7 @@ function notificationClicked(notificationId) {
 chrome.extension.onMessage.addListener(onMessage);
 chrome.notifications.onClicked.addListener(notificationClicked);
 chrome.alarms.onAlarm.addListener(onAlarm);
-chrome.alarms.create('update-mails', { 'when': (new Date()).setHours(0, 21, 0, 0) });
-
+chrome.alarms.create('update-mails', { 'when': (new Date()).setHours(24, 0, 0, 0) });
 
 
 

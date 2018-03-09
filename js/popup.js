@@ -8,15 +8,19 @@ let newDate;
 function initializeWorld() {
     //obtain emails from the background page
     gmailObject = chrome.extension.getBackgroundPage().gmailsToday;
+
+    //this is to handle all edge cases
+    //TODO: Find a better way to do this
     let isLoading = chrome.extension.getBackgroundPage().isLoading;
     let finishedLoading = chrome.extension.getBackgroundPage().finishedLoading;
+    let isGmailsTodaySet = chrome.extension.getBackgroundPage().isGmailsTodaySet;
 
     if (finishedLoading) {
         gmails = gmailObject.emailObj;
         createWorld();
         return 0;
     }
-    if(!isLoading && !finishedLoading) {
+    if (!isLoading && !finishedLoading && !isGmailsTodaySet) {
         let options = {
             thisMonthDay: ''
         }
@@ -64,9 +68,11 @@ function setupInbox() {
 //TODO: Sort them by importance?
 function setupNavBar() {
     let = html = ''
-    html += '';
+    html += '<a class="navLabel" id="INBOX" href="#">Inbox ' + '(' + getEmailCount('INBOX') + ')</a><hr>';
+    $('#navBar').html(html);
     for (let label in gmails) {
         let formattedLabel = formatLabel(label);
+        formattedLabel === 'Inbox' ? undefined : formattedLabel;
         if (formattedLabel) {
             html += '<a class="navLabel" id="' + label + '" href="#">' + formatLabel(label) + ' (' + getEmailCount(label) + ')</a><hr>';
         }
@@ -199,6 +205,7 @@ function formatLabel(label) {
         case 'CATEGORY_SOCIAL': return 'Social';
         case 'CATEGORY_UPDATES': return 'Updates';
         case 'CATEGORY_PROMOTIONS': return 'Promotions';
+        case 'INBOX': return 'Inbox';
         case 'IMPORTANT': return undefined;
         case 'UNREAD': return undefined;
         default: return cap(label);
