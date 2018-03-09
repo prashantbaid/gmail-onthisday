@@ -4,18 +4,6 @@ let gmails;
 let newDate;
 
 
-//TODO: If something unexpected breaks, the page is going to load forever.
-//Do more error handling.
-$('#emailContainer').hide();
-$('#preloader').show();
-
-
-//TODO: Find a non ugly way of doing this.
-function authorizeGmail() {
-    chrome.extension.getBackgroundPage().getAuthTokenInteractive();
-}
-
-
 //TODO: Find a non ugly way of doing this.
 function initializeWorld() {
     if (chrome.extension.getBackgroundPage().finishedLoading) {
@@ -265,6 +253,11 @@ function getEmailCount(label) {
 //Stuff happens here
 $(document).ready(function () {
 
+    //TODO: If something unexpected breaks, the page is going to load forever.
+    //Do more error handling.
+    $('#emailContainer').hide();
+    $('#preloader').show();
+
     //Check if User has authorised me. 
     //TODO: Check how to fix the weird 401 unauthorized issue with Gmail API
     chrome.identity.getAuthToken({ 'interactive': false }, function (token) {
@@ -355,7 +348,7 @@ $(document).ready(function () {
     });
 
     $("body").on("click", "a#authorizeGmail", function () {
-        authorizeGmail();
+        chrome.extension.getBackgroundPage().getAuthTokenInteractive();
     });
 
     $("body").on("click", "input#importantCheck", function () {
