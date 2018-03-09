@@ -341,6 +341,7 @@ $(document).ready(function () {
             chrome.extension.sendMessage({ msg: "reboot", thisMonthDay: date });
             $('#emailContainer').hide();
             $('#preloader').show();
+            $('#dateSelector').hide();
         }
 
     });
