@@ -233,16 +233,16 @@ function beautifyEmails(email, year) {
         }
 
         if (part.mimeType === 'text/html') {
-            final.body = decodeURIComponent(escape(atob(part.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));
+            final.body = part.body && part.body.data && decodeURIComponent(escape(atob(part.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));
         }
     }
 
     if (final.mimeType === 'text/html' || final.mimeType === 'text/plain') {
-        final.body = decodeURIComponent(escape(atob(json.payload.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));
+        final.body = json.payload.body && json.payload.body.data && decodeURIComponent(escape(atob(json.payload.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));
     }
 
     if (final.labels.includes('CHAT')) {
-        final.body = json.payload.body && decodeURIComponent(escape(atob(json.payload.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));;
+        final.body = json.payload.body && json.payload.body && decodeURIComponent(escape(atob(json.payload.body.data.replace(/\-/g, '+').replace(/\_/g, '/'))));;
         final.subject = json.snippet;
     }
 
@@ -401,7 +401,7 @@ function notificationClicked(notificationId) {
 chrome.extension.onMessage.addListener(onMessage);
 chrome.notifications.onClicked.addListener(notificationClicked);
 chrome.alarms.onAlarm.addListener(onAlarm);
-chrome.alarms.create('update-mails', { 'when': (new Date()).setHours(24, 0, 0, 0) });
+chrome.alarms.create('update-mails', { 'when': (new Date()).setHours(24, 0, 0, 0), 'periodInMinutes': 1440 });
 
 
 
