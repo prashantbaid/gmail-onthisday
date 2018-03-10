@@ -3,7 +3,7 @@
 
 ![Alt text](/img/logog.png?raw=true) 
 
-#Gmail: On This Day, That Year
+# Gmail: On This Day, That Year
 
 A Gmail version of Facebook's "On This Day". Look back at your Gmail memories on this day from past years. A chrome extension.
 
@@ -11,7 +11,7 @@ A Gmail version of Facebook's "On This Day". Look back at your Gmail memories on
 
 ---
 
-##Screenshots
+## Screenshots
 
 
 **View emails sorted by categories**
